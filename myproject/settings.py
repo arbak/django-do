@@ -143,3 +143,19 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Handle subpath deployment (for /manager/ routing)
 FORCE_SCRIPT_NAME = config('FORCE_SCRIPT_NAME', default='')
+
+# CSRF and Security settings for DigitalOcean App Platform
+csrf_origins = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='https://bionezis-app-5ekuk.ondigitalocean.app,https://plankton-app-qyv2z.ondigitalocean.app',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
+
+# Add wildcard support for DigitalOcean domains
+CSRF_TRUSTED_ORIGINS = csrf_origins + [
+    'https://*.ondigitalocean.app',
+]
+
+# Additional security settings
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False  # Let DigitalOcean handle SSL

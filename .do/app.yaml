@@ -57,13 +57,16 @@ services:
     value: "False"
   - key: ALLOWED_HOSTS
     scope: RUN_AND_BUILD_TIME
-    value: localhost,127.0.0.1,bionezis-app-5ekuk.ondigitalocean.app
+    value: localhost,127.0.0.1,bionezis-app-5ekuk.ondigitalocean.app,plankton-app-qyv2z.ondigitalocean.app,*.ondigitalocean.app
   - key: DATABASE_URL
     scope: RUN_AND_BUILD_TIME
     value: sqlite:///db.sqlite3
   - key: FORCE_SCRIPT_NAME
     scope: RUN_AND_BUILD_TIME
     value: /manager
+  - key: CSRF_TRUSTED_ORIGINS
+    scope: RUN_AND_BUILD_TIME
+    value: https://bionezis-app-5ekuk.ondigitalocean.app,https://plankton-app-qyv2z.ondigitalocean.app,https://*.ondigitalocean.app
   - key: DJANGO_SUPERUSER_USERNAME
     scope: RUN_AND_BUILD_TIME
     value: admin
