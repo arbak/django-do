@@ -14,7 +14,8 @@ services:
     repo: arbak/django-do
     branch: main
     deploy_on_push: true
-  dockerfile_path: /Dockerfile
+  environment_slug: python
+  run_command: ./start.sh
   instance_count: 1
   instance_size_slug: apps-s-1vcpu-0.5gb
   http_port: 8080

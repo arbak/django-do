@@ -21,8 +21,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . /app/
 
-# Ensure static directory exists
-RUN mkdir -p /app/static
+# Ensure static directory exists and set proper permissions
+RUN mkdir -p /app/static && \
+    chmod -R 755 /app/static
 
 # Create a non-root user
 RUN adduser --disabled-password --gecos '' appuser
