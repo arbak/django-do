@@ -1,0 +1,30 @@
+name: django-app
+services:
+- name: web
+  source_dir: /
+  github:
+    repo: your-username/your-repo-name
+    branch: main
+  run_command: gunicorn --bind 0.0.0.0:$PORT myproject.wsgi:application
+  environment_slug: python
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  http_port: 8080
+  envs:
+  - key: DJANGO_SETTINGS_MODULE
+    value: myproject.settings
+  - key: SECRET_KEY
+    value: your-secret-key-here
+  - key: DEBUG
+    value: "False"
+  - key: ALLOWED_HOSTS
+    value: "*.ondigitalocean.app"
+  routes:
+  - path: /
+  health_check:
+    http_path: /
+    initial_delay_seconds: 10
+    period_seconds: 10
+    timeout_seconds: 5
+    success_threshold: 1
+    failure_threshold: 3

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} - My Django App{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="jumbotron bg-primary text-white p-5 rounded mb-4">
+            <h1 class="display-4">{{ title }}</h1>
+            <p class="lead">{{ message }}</p>
+            <hr class="my-4">
+            <p>This application includes Django admin functionality and is ready for deployment.</p>
+            <a class="btn btn-light btn-lg" href="/admin/" role="button">Go to Admin</a>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Django Admin</h5>
+                        <p class="card-text">Access the Django admin interface to manage your application data.</p>
+                        <a href="/admin/" class="btn btn-primary">Admin Panel</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Static Files</h5>
+                        <p class="card-text">CSS and JavaScript files are properly configured for production deployment.</p>
+                        <button class="btn btn-success" onclick="showAlert()">Test JavaScript</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
