@@ -25,7 +25,11 @@ def home(request):
 
 def home_static(request):
     """Static home page for testing."""
-    return render(request, 'pages/home_static.html')
+    try:
+        return render(request, 'pages/home_static.html')
+    except Exception as e:
+        # Fallback to simple template if there are any issues
+        return render(request, 'pages/home_simple.html')
 
 
 def health_check(request):

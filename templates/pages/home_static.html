@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container-fluid">
     <!-- Hero Section -->
-    <div class="jumbotron bg-gradient text-white p-5 rounded mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="jumbotron bg-primary text-white p-5 rounded mb-4">
         <div class="container">
             <h1 class="display-4">🚀 Static Test Page</h1>
             <p class="lead">This is a static HTML page to test Django routing and static files!</p>
@@ -22,7 +22,7 @@
             <div class="card h-100 shadow-sm">
                 <div class="card-body text-center">
                     <div class="mb-3">
-                        <i class="fas fa-rocket fa-3x text-primary"></i>
+                        <span style="font-size: 3rem;">🚀</span>
                     </div>
                     <h5 class="card-title">Django Deployment</h5>
                     <p class="card-text">Successfully deployed on DigitalOcean App Platform with Docker!</p>
@@ -33,7 +33,7 @@
             <div class="card h-100 shadow-sm">
                 <div class="card-body text-center">
                     <div class="mb-3">
-                        <i class="fas fa-cogs fa-3x text-success"></i>
+                        <span style="font-size: 3rem;">⚙️</span>
                     </div>
                     <h5 class="card-title">Static Files</h5>
                     <p class="card-text">CSS, JavaScript, and images are properly served by WhiteNoise.</p>
@@ -44,7 +44,7 @@
             <div class="card h-100 shadow-sm">
                 <div class="card-body text-center">
                     <div class="mb-3">
-                        <i class="fas fa-shield-alt fa-3x text-warning"></i>
+                        <span style="font-size: 3rem;">🛡️</span>
                     </div>
                     <h5 class="card-title">Security</h5>
                     <p class="card-text">CSRF protection, secure headers, and production-ready settings.</p>
@@ -196,10 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Custom CSS for this page -->
 <style>
-.bg-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
 .card {
     transition: all 0.3s ease;
 }
