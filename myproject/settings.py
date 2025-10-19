@@ -124,9 +124,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Additional locations of static files
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+static_dirs = []
+if os.path.exists(BASE_DIR / 'static'):
+    static_dirs.append(BASE_DIR / 'static')
+STATICFILES_DIRS = static_dirs
 
 # WhiteNoise configuration for static files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

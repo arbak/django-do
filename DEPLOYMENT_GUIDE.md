@@ -140,3 +140,7 @@ Your Django app is now deployed with:
 - [DigitalOcean App Platform Docs](https://docs.digitalocean.com/products/app-platform/)
 - [Django Deployment Guide](https://docs.djangoproject.com/en/4.2/howto/deployment/)
 - [WhiteNoise Documentation](https://whitenoise.readthedocs.io/)
+
+
+
+
