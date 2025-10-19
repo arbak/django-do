@@ -3,9 +3,9 @@ services:
 - name: web
   source_dir: /
   github:
-    repo: your-username/your-repo-name
+    repo: arbak/django-do
     branch: main
-  run_command: gunicorn --bind 0.0.0.0:$PORT myproject.wsgi:application
+  run_command: ./start.sh
   environment_slug: python
   instance_count: 1
   instance_size_slug: basic-xxs
@@ -14,11 +14,17 @@ services:
   - key: DJANGO_SETTINGS_MODULE
     value: myproject.settings
   - key: SECRET_KEY
-    value: your-secret-key-here
+    value: django-insecure-change-this-in-production-12345
   - key: DEBUG
     value: "False"
   - key: ALLOWED_HOSTS
     value: "*.ondigitalocean.app"
+  - key: DJANGO_SUPERUSER_USERNAME
+    value: "admin"
+  - key: DJANGO_SUPERUSER_EMAIL
+    value: "admin@example.com"
+  - key: DJANGO_SUPERUSER_PASSWORD
+    value: "admin123"
   routes:
   - path: /
   health_check:
