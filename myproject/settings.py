@@ -124,17 +124,12 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Additional locations of static files
-static_dirs = []
-if os.path.exists(BASE_DIR / 'static'):
-    static_dirs.append(BASE_DIR / 'static')
-STATICFILES_DIRS = static_dirs
+STATICFILES_DIRS = [
+    BASE_DIR / 'pages' / 'static',
+]
 
 # WhiteNoise configuration for static files
-STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
-
-# Additional WhiteNoise settings
-WHITENOISE_USE_FINDERS = True
-WHITENOISE_AUTOREFRESH = True
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

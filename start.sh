@@ -9,10 +9,10 @@ echo "🚀 Starting Django application..."
 echo "📊 Running database migrations..."
 python manage.py migrate --noinput
 
-# Collect static files
+# Collect static files (fallback if not done in Dockerfile)
 echo "📁 Collecting static files..."
-python manage.py collectstatic --noinput --verbosity=2
-echo "📁 Static files collected successfully"
+python manage.py collectstatic --noinput || true
+echo "📁 Static files collection completed"
 
 # Create superuser if it doesn't exist
 echo "👤 Creating superuser..."
