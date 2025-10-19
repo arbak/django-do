@@ -1,36 +1,89 @@
-name: django-app
+name: bionezis-app
+region: ams
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+features:
+- buildpack-stack=ubuntu-22
+
 services:
-- name: web
+# Node.js service (bionezis)
+- name: bionezis
+  source_dir: /
+  github:
+    repo: arbak/bionezis
+    branch: main
+    deploy_on_push: true
+  run_command: npm start
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: apps-s-1vcpu-0.5gb
+  http_port: 8080
+  envs:
+  - key: NEXT_PUBLIC_SUPABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:9BJmnGEbp5bIEJnfZfSJ3876KCal9Yr2:nf0htu2YDwxbXB1fpmTBByDPGczvKLupkatNezlnwkxltP1oJ0dWVsnnCf3aMZ7r68/1QieOJmQ=]
+  - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:1ZaXPvsdXaFNc60rGLkZVJ77VkrS+Xyu:rVU5rKvv5PJRoArENqFjn7P/KnDhE9yC54vcfzd0CZnRO7gNwkL4OA9eK9WTRnXBZr8eYEmY2ShU8v3GPovcvz7mLR+WCrVpRlIR1DJOB0mlU8wTd5i9aeiytDcuX1mNhe8j29XbGGBTq3B3L9CnLpSfOStxgqLl0ZdtXCgChIByUiFkuVfu5uOgNALEC75KMKLeY6hyL7WcJqYcN+EUidrMJVFKf3anMjB+1pvA83LV3i7ztcahfkoU8btj+NYyV7W8QijuLrYRigJFOws1U6ybOjhWD1V20V+PHzvoFUU=]
+  - key: SUPABASE_SERVICE_ROLE_KEY
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:HUM14XBi0tVymT2KK4DumEC3BRBF/73V:erUhzL7TrFHNXyhvKaEXZjQcJC6p8UAvbSk7rm7cv6z+I7McLJdZAEIAwRHB09Y3hx/dd2RlKSXkhlOWtSQ/R+cdmbvRLu7sxZsM6Am8CoPVNQpGQvQpzqlXovsjfRz8mDDyqGvpFribP+KmabYU9d/uMlSMi0J7Zmw9j72sPGTIAG8C36c8m9WwjNtZhEmm3YyaGynPOqTDHBgm0NCprHHjL/Iv+rXdAuzM8Yj+jJBrSAGR7CccabNvIBHOlmb/tW84XHj0p8aRAv+VggDUPSsRSSUzEMdc7KWquXWoRpHVKBMBETA1F4klHA==]
+  - key: OPENAI_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:dHBLpw0w2iZB2wX47DccxmRmKO/d5n0r:j4vYo7gJLOgAmucN1zl1zUidmnnJ4Wii88tNGsvm9XdHc7hSV0uoMV0eBxUjTy6fT0kslJPgFRerVfQhXjjRxz6igxh+6YO+rOQdEYaaebP7JNF4AIEjPqvLqr09BprboopNO9k4ohREcJZ9cldHEFGqpccShb52454fbmnZj7sS9tx8cbO88pO5HjGB80OIJXpyisK3uTBzVDyI67QV3yOolfkncfOr4afeAI84QnFFWv69]
+
+# Django service (django-do)
+- name: django-do
   source_dir: /
   github:
     repo: arbak/django-do
     branch: main
-  run_command: ./start.sh
-  environment_slug: python
+    deploy_on_push: true
+  dockerfile_path: /Dockerfile
   instance_count: 1
-  instance_size_slug: basic-xxs
+  instance_size_slug: apps-s-1vcpu-0.5gb
   http_port: 8080
   envs:
-  - key: DJANGO_SETTINGS_MODULE
-    value: myproject.settings
   - key: SECRET_KEY
-    value: django-insecure-change-this-in-production-12345
+    scope: RUN_AND_BUILD_TIME
+    value: mv1!_96ked49)5kk7vu&91(%vwd8i76zl*y4*hrdqcvris
   - key: DEBUG
+    scope: RUN_AND_BUILD_TIME
     value: "False"
   - key: ALLOWED_HOSTS
-    value: "*.ondigitalocean.app"
+    scope: RUN_AND_BUILD_TIME
+    value: localhost,127.0.0.1,bionezis-app-5ekuk.ondigitalocean.app
+  - key: DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: sqlite:///db.sqlite3
   - key: DJANGO_SUPERUSER_USERNAME
-    value: "admin"
+    scope: RUN_AND_BUILD_TIME
+    value: admin
   - key: DJANGO_SUPERUSER_EMAIL
-    value: "admin@example.com"
+    scope: RUN_AND_BUILD_TIME
+    value: admin@example.com
   - key: DJANGO_SUPERUSER_PASSWORD
-    value: "admin123"
-  routes:
-  - path: /
-  health_check:
-    http_path: /
-    initial_delay_seconds: 10
-    period_seconds: 10
-    timeout_seconds: 5
-    success_threshold: 1
-    failure_threshold: 3
+    scope: RUN_AND_BUILD_TIME
+    value: admin123
+
+ingress:
+  rules:
+  - component:
+      name: bionezis
+    match:
+      authority:
+        exact: ""
+      path:
+        prefix: /
+  - component:
+      name: django-do
+    match:
+      authority:
+        exact: ""
+      path:
+        prefix: /manager
