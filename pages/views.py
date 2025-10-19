@@ -5,15 +5,21 @@ import os
 
 def home(request):
     """Simple home page view."""
+    from django.conf import settings
+    
     context = {
         'title': 'Welcome to My Django App',
         'message': 'This is a simple Django application deployed on DigitalOcean App Platform!',
-        'debug_info': {
+    }
+    
+    # Only show debug information when DEBUG=True
+    if settings.DEBUG:
+        context['debug_info'] = {
             'debug': os.environ.get('DEBUG', 'Not set'),
             'force_script_name': os.environ.get('FORCE_SCRIPT_NAME', 'Not set'),
             'allowed_hosts': os.environ.get('ALLOWED_HOSTS', 'Not set'),
         }
-    }
+    
     return render(request, 'pages/home.html', context)
 
 

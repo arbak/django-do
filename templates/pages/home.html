@@ -33,6 +33,32 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Debug Information (only shown when DEBUG=True) -->
+        {% if debug_info %}
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Debug Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>DEBUG:</strong> {{ debug_info.debug }}
+                            </div>
+                            <div class="col-md-4">
+                                <strong>FORCE_SCRIPT_NAME:</strong> {{ debug_info.force_script_name }}
+                            </div>
+                            <div class="col-md-4">
+                                <strong>ALLOWED_HOSTS:</strong> {{ debug_info.allowed_hosts }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
