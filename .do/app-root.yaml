@@ -1,4 +1,4 @@
-name: bionezis-app
+name: django-app-root
 region: ams
 alerts:
 - rule: DEPLOYMENT_FAILED
@@ -7,8 +7,8 @@ features:
 - buildpack-stack=ubuntu-22
 
 services:
-# Django service (django-do)
-- name: django-do
+# Django service (root deployment)
+- name: web
   source_dir: /
   github:
     repo: arbak/django-do
@@ -21,13 +21,13 @@ services:
   envs:
   - key: SECRET_KEY
     scope: RUN_AND_BUILD_TIME
-    value: mv1!_96ked49)5kk7vu&91(%vwd8i76zl*y4*hrdqcvris
+    value: django-insecure-change-this-in-production-12345
   - key: DEBUG
     scope: RUN_AND_BUILD_TIME
     value: "False"
   - key: ALLOWED_HOSTS
     scope: RUN_AND_BUILD_TIME
-    value: localhost,127.0.0.1,bionezis-app-5ekuk.ondigitalocean.app,plankton-app-qyv2z.ondigitalocean.app,*.ondigitalocean.app
+    value: "*.ondigitalocean.app"
   - key: DATABASE_URL
     scope: RUN_AND_BUILD_TIME
     value: sqlite:///db.sqlite3
@@ -36,7 +36,7 @@ services:
     value: ""
   - key: CSRF_TRUSTED_ORIGINS
     scope: RUN_AND_BUILD_TIME
-    value: https://bionezis-app-5ekuk.ondigitalocean.app,https://plankton-app-qyv2z.ondigitalocean.app,https://*.ondigitalocean.app
+    value: "https://*.ondigitalocean.app"
   - key: DJANGO_SUPERUSER_USERNAME
     scope: RUN_AND_BUILD_TIME
     value: admin
@@ -57,7 +57,7 @@ services:
 ingress:
   rules:
   - component:
-      name: django-do
+      name: web
     match:
       authority:
         exact: ""
