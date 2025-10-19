@@ -147,7 +147,7 @@ FORCE_SCRIPT_NAME = config('FORCE_SCRIPT_NAME', default='')
 # CSRF and Security settings for DigitalOcean App Platform
 csrf_origins = config(
     'CSRF_TRUSTED_ORIGINS',
-    default='https://bionezis-app-5ekuk.ondigitalocean.app,https://plankton-app-qyv2z.ondigitalocean.app',
+    default='https://plankton-app-qyv2z.ondigitalocean.app',
     cast=lambda v: [s.strip() for s in v.split(',')]
 )
 
