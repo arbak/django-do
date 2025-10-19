@@ -135,7 +135,8 @@ dmypy.json
 
 # Static files
 staticfiles/
-static/
+# Don't ignore app static directories
+# static/
 
 # Media files
 media/

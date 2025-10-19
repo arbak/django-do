@@ -21,6 +21,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . /app/
 
+# Ensure static directories exist
+RUN mkdir -p /app/pages/static/css /app/pages/static/js
+
 # Collect static files during build
 RUN python manage.py collectstatic --noinput
 
