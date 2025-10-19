@@ -18,5 +18,5 @@ echo "👤 Creating superuser..."
 python manage.py create_superuser_auto
 
 # Start the application
-echo "🌐 Starting Gunicorn server..."
-exec gunicorn --bind 0.0.0.0:$PORT myproject.wsgi:application
+echo "🌐 Starting Gunicorn server on port ${PORT:-8080}..."
+exec gunicorn --bind 0.0.0.0:${PORT:-8080} myproject.wsgi:application

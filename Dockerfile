@@ -21,9 +21,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . /app/
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
-
 # Create a non-root user
 RUN adduser --disabled-password --gecos '' appuser
 RUN chown -R appuser:appuser /app
@@ -32,5 +29,9 @@ USER appuser
 # Expose port
 EXPOSE 8080
 
-# Run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "myproject.wsgi:application"]
+# Copy and make startup script executable
+COPY --chown=appuser:appuser start.sh /app/
+RUN chmod +x /app/start.sh
+
+# Run the startup script
+CMD ["/app/start.sh"]
