@@ -140,3 +140,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = '/admin/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Handle subpath deployment (for /manager/ routing)
+FORCE_SCRIPT_NAME = config('FORCE_SCRIPT_NAME', default='')

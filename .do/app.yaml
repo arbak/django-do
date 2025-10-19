@@ -61,6 +61,9 @@ services:
   - key: DATABASE_URL
     scope: RUN_AND_BUILD_TIME
     value: sqlite:///db.sqlite3
+  - key: FORCE_SCRIPT_NAME
+    scope: RUN_AND_BUILD_TIME
+    value: /manager
   - key: DJANGO_SUPERUSER_USERNAME
     scope: RUN_AND_BUILD_TIME
     value: admin
@@ -70,6 +73,13 @@ services:
   - key: DJANGO_SUPERUSER_PASSWORD
     scope: RUN_AND_BUILD_TIME
     value: admin123
+  health_check:
+    http_path: /health/
+    initial_delay_seconds: 10
+    period_seconds: 10
+    timeout_seconds: 5
+    success_threshold: 1
+    failure_threshold: 3
 
 ingress:
   rules:
