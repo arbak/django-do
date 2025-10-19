@@ -11,7 +11,8 @@ python manage.py migrate --noinput
 
 # Collect static files
 echo "📁 Collecting static files..."
-python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput --verbosity=2
+echo "📁 Static files collected successfully"
 
 # Create superuser if it doesn't exist
 echo "👤 Creating superuser..."
