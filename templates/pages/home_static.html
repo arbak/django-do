@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% block title %}Static Test Page - My Django App{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Hero Section -->
+    <div class="jumbotron bg-gradient text-white p-5 rounded mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <h1 class="display-4">🚀 Static Test Page</h1>
+            <p class="lead">This is a static HTML page to test Django routing and static files!</p>
+            <hr class="my-4">
+            <p>Perfect for testing deployment and static file serving.</p>
+            <a class="btn btn-light btn-lg" href="/" role="button">← Back to Main</a>
+            <a class="btn btn-outline-light btn-lg" href="/admin/" role="button">Admin Panel</a>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-rocket fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title">Django Deployment</h5>
+                    <p class="card-text">Successfully deployed on DigitalOcean App Platform with Docker!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-cogs fa-3x text-success"></i>
+                    </div>
+                    <h5 class="card-title">Static Files</h5>
+                    <p class="card-text">CSS, JavaScript, and images are properly served by WhiteNoise.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-shield-alt fa-3x text-warning"></i>
+                    </div>
+                    <h5 class="card-title">Security</h5>
+                    <p class="card-text">CSRF protection, secure headers, and production-ready settings.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Section -->
+    <div class="row mb-5">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">🎨 CSS & JavaScript Test</h5>
+                </div>
+                <div class="card-body">
+                    <p>Test if static files are loading correctly:</p>
+                    <button class="btn btn-primary me-2" onclick="testJavaScript()">Test JavaScript</button>
+                    <button class="btn btn-success me-2" onclick="changeColors()">Change Colors</button>
+                    <button class="btn btn-info" onclick="showAlert()">Show Alert</button>
+                    <div id="test-result" class="mt-3 p-3 bg-light rounded" style="display: none;">
+                        <strong>JavaScript is working! 🎉</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">📊 System Information</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><strong>Framework:</strong> Django 4.2.7</li>
+                        <li><strong>Platform:</strong> DigitalOcean App Platform</li>
+                        <li><strong>Container:</strong> Docker</li>
+                        <li><strong>Static Files:</strong> WhiteNoise</li>
+                        <li><strong>Database:</strong> SQLite</li>
+                        <li><strong>Web Server:</strong> Gunicorn</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Color Test Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">🌈 Color Test Section</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="color-boxes">
+                        <div class="col-md-3 mb-3">
+                            <div class="p-4 bg-primary text-white rounded text-center">
+                                <strong>Primary</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="p-4 bg-success text-white rounded text-center">
+                                <strong>Success</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="p-4 bg-warning text-dark rounded text-center">
+                                <strong>Warning</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="p-4 bg-danger text-white rounded text-center">
+                                <strong>Danger</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">🔗 Navigation Links</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <a href="/" class="btn btn-outline-primary w-100">🏠 Main Page</a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="/admin/" class="btn btn-outline-success w-100">⚙️ Admin Panel</a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="/health/" class="btn btn-outline-info w-100">💚 Health Check</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom JavaScript for this page -->
+<script>
+function testJavaScript() {
+    document.getElementById('test-result').style.display = 'block';
+    document.getElementById('test-result').innerHTML = '<strong>✅ JavaScript is working perfectly! 🎉</strong><br><small>Static files are loading correctly.</small>';
+}
+
+function changeColors() {
+    const boxes = document.querySelectorAll('#color-boxes .col-md-3 div');
+    const colors = ['bg-primary', 'bg-success', 'bg-warning', 'bg-danger', 'bg-info', 'bg-secondary'];
+    
+    boxes.forEach((box, index) => {
+        // Remove all color classes
+        box.className = box.className.replace(/bg-\w+/g, '');
+        // Add new random color
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        box.classList.add(randomColor);
+        box.classList.add('text-white');
+    });
+}
+
+function showAlert() {
+    alert('🎉 Static files are working perfectly!\n\n✅ CSS loaded\n✅ JavaScript loaded\n✅ Django routing working\n✅ DigitalOcean deployment successful!');
+}
+
+// Add some interactive effects
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Static test page loaded successfully!');
+    
+    // Add hover effects to cards
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});
+</script>
+
+<!-- Custom CSS for this page -->
+<style>
+.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+#test-result {
+    transition: all 0.5s ease;
+}
+</style>
+{% endblock %}

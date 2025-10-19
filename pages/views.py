@@ -23,6 +23,11 @@ def home(request):
     return render(request, 'pages/home.html', context)
 
 
+def home_static(request):
+    """Static home page for testing."""
+    return render(request, 'pages/home_static.html')
+
+
 def health_check(request):
     """Health check endpoint for DigitalOcean."""
     return JsonResponse({
